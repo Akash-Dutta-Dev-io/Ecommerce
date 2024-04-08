@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav {
+        background-color: #333;
+        overflow: hidden;
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    nav ul li {
+        display: inline-block;
+    }
+
+    nav ul li a {
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    nav ul li a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .logo {
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .logo:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .container {
+        width: 50%;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid black;
+        border-radius: 15px;
+    }
+
+    .container h2 {
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    .welcome{
+        text-align: center;
+    }
+</style>
+
+<body>
+    <nav>
+        <a href="#" class="logo">Logo</a>
+        <ul>
+            <li>
+                <a href="{% url 'buyer_home' %}">Home</a>
+                <a href="{% url 'view_cart' %}">View Cart</a>
+                <a href="{% url 'logout' %}">Logout</a>
+
+            </li>
+        </ul>
+    </nav>
+    <div class="welcome">
+        <h1>Buy Now</h1>
+    </div>
+    <div class="container">
+        {% if error_message %}
+        <p>{{ error_message }}</p>
+        {% endif %}
+        <form action="{% url 'buy_now' product.id %}" method="post">
+            {% csrf_token %}
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="phone">Phone:</label><br>
+            <input type="text" id="phone" name="phone" required><br>
+            <label for="alt_phone">Alternate Phone:</label><br>
+            <input type="text" id="alt_phone" name="alt_phone"><br>
+            <label for="state">State:</label><br>
+            <input type="text" id="state" name="state" required><br>
+            <label for="city">City:</label><br>
+            <input type="text" id="city" name="city" required><br>
+            <label for="house_no">House No:</label><br>
+            <input type="text" id="house_no" name="house_no" required><br>
+            <label for="area">Area:</label><br>
+            <input type="text" id="area" name="area" required><br>
+            <label for="nearby">Nearby:</label><br>
+            <input type="text" id="nearby" name="nearby" required><br>
+            <label for="address">Address:</label><br>
+            <textarea id="address" name="address" required></textarea><br>
+            <label for="option_choice">Option:</label><br>
+            <select id="option_choice" name="option_choice" required>
+                <option value="Home">Home</option>
+                <option value="Office">Office</option>
+            </select><br> <br>
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+</body>
+
+</html>
